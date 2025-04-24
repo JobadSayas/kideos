@@ -14,29 +14,33 @@ const Video = ({ url }) => {
         playerRef.current = new window.YT.Player('player', {
           videoId: url.split('/embed/')[1].split('?')[0],
           playerVars: {
-            'autoplay': 1,
+            'autoplay': 0,
             'controls': 0,
             'disablekb': 1,
             'modestbranding': 1,
             'fs': 0,
-            'cc_load_policy': 0,  // Primera capa de protección
+            'cc_load_policy': 0,  // Bloquea CC inicialmente
             'iv_load_policy': 3,
-            'rel': 0
+            'rel': 0,
+            'hl': 'en'  // Fuerza idioma inglés (sin CC automáticos)
           },
           events: {
             'onReady': (event) => {
-              // Segunda capa de protección (fuerza desactivación)
+              // Método INFALIBLE para eliminar CC
               event.target.setOption('captions', 'off');
               event.target.setOption('subtitles', 'off');
-              // Tercera capa (por si acaso)
               event.target.unloadModule('captions');
+              // Elimina el botón de CC del DOM (solución nuclear)
+              setTimeout(() => {
+                const ccButton = document.querySelector('.ytp-subtitles-button');
+                if (ccButton) ccButton.remove();
+              }, 1000);
+              setIsPlaying(false);
             },
             'onStateChange': (event) => {
               setIsPlaying(event.data === window.YT.PlayerState.PLAYING);
-              // Cuarta capa cuando cambia el estado
-              if (event.target.getOptions().includes('captions')) {
-                event.target.setOption('captions', 'off');
-              }
+              // Verificación constante
+              event.target.setOption('captions', 'off');
             }
           }
         });
@@ -48,8 +52,7 @@ const Video = ({ url }) => {
     } else {
       const tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      document.body.appendChild(tag);
       window.onYouTubeIframeAPIReady = initPlayer;
     }
 
@@ -70,11 +73,11 @@ const Video = ({ url }) => {
     <div className="relative flex flex-col items-center">
       <div 
         id="player" 
-        className="pointer-events-none w-[1100px] h-[620px]"
+        className="pointer-events-none w-[1100px] h-[620px] bg-black"
       ></div>
       <button
         onClick={togglePlay}
-        className="px-6 py-2 text-white rounded-full transition-all mt-4 w-[50px] h-[55px] flex justify-center items-center border-[3px] border-white absolute bottom-[10px] left-[10px]"
+        className="px-6 py-2 text-white rounded-full transition-all w-[50px] h-[55px] flex justify-center items-center border-[3px] border-white absolute bottom-[10px] left-[10px] z-50"
       >
         <i className={`text-2xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`}></i>
       </button>
