@@ -14,22 +14,30 @@ const Video = ({ url }) => {
         playerRef.current = new window.YT.Player('player', {
           videoId: url.split('/embed/')[1].split('?')[0],
           playerVars: {
-            'autoplay': 1, // Auto-reproducir al cargar
+            'autoplay': 1,
             'controls': 0,
             'disablekb': 1,
             'modestbranding': 1,
             'fs': 0,
-            'cc_load_policy': 0, // Desactiva subtítulos
-            'iv_load_policy': 3, // Desactiva anotaciones
-            'rel': 0 // Desactiva videos relacionados
+            'cc_load_policy': 0,  // Primera capa de protección
+            'iv_load_policy': 3,
+            'rel': 0
           },
           events: {
             'onReady': (event) => {
-              // Fuerza desactivar CC completamente
+              // Segunda capa de protección (fuerza desactivación)
               event.target.setOption('captions', 'off');
               event.target.setOption('subtitles', 'off');
+              // Tercera capa (por si acaso)
+              event.target.unloadModule('captions');
             },
-            'onStateChange': onPlayerStateChange
+            'onStateChange': (event) => {
+              setIsPlaying(event.data === window.YT.PlayerState.PLAYING);
+              // Cuarta capa cuando cambia el estado
+              if (event.target.getOptions().includes('captions')) {
+                event.target.setOption('captions', 'off');
+              }
+            }
           }
         });
       }
@@ -42,7 +50,6 @@ const Video = ({ url }) => {
       tag.src = "https://www.youtube.com/iframe_api";
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      
       window.onYouTubeIframeAPIReady = initPlayer;
     }
 
@@ -52,10 +59,6 @@ const Video = ({ url }) => {
       }
     };
   }, [url]);
-
-  const onPlayerStateChange = (event) => {
-    setIsPlaying(event.data === window.YT.PlayerState.PLAYING);
-  };
 
   const togglePlay = () => {
     if (playerRef.current) {
