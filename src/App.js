@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Video from './components/Video';
+import Catalog from './components/Catalog';
 
 function App() {
+  const [currentVideo, setCurrentVideo] = useState(
+    'https://www.youtube.com/embed/kLyGRfd_6Zs?enablejsapi=1&controls=0'
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-black flex flex-col justify-center items-center min-h-screen text-white space-y-4">
+      <Video url={currentVideo} />
+      <Catalog onVideoSelect={setCurrentVideo} />
     </div>
   );
 }
