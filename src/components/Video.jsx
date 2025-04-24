@@ -70,7 +70,7 @@ const Video = ({ url }) => {
     <div className="relative flex flex-col items-center">
       <div 
         id="player" 
-        className="pointer-events-none w-[1000px] h-[564px]"
+        className="pointer-events-none w-[1100px] h-[620px]"
       ></div>
       <button
         onClick={togglePlay}
