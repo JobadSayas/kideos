@@ -77,7 +77,7 @@ const Video = ({ url }) => {
       ></div>
       <button
         onClick={togglePlay}
-        className="px-6 py-2 text-white rounded-full transition-all w-[50px] h-[55px] flex justify-center items-center border-[3px] border-white absolute bottom-[10px] left-[10px] z-50"
+        className="px-6 py-2 text-white rounded-full transition-all w-[50px] h-[55px] flex justify-center items-center border-[3px] border-white absolute bottom-[10px] left-[10px] z-50 bg-black bg-opacity-25"
       >
         <i className={`text-2xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`}></i>
       </button>
