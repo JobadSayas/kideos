@@ -1,7 +1,6 @@
-body {
-    touch-action: manipulation; /* Evita zoom con doble toque */
-    overflow: hidden; /* Desactiva scroll */
-    position: fixed; /* Bloquea el viewport */
-    width: 100%;
+/* Elimina todo el contenido y deja solo esto */
+html, body, #root {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }

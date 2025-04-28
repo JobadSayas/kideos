@@ -3,7 +3,8 @@ import VideoPlayer from './components/VideoPlayer';
 import Catalog from './components/Catalog';
 
 function App() {
-  const [currentView, setCurrentView] = useState('catalog'); // 'catalog' o 'player'
+  const version = '2.1'
+  const [currentView, setCurrentView] = useState('catalog');
   const [currentVideo, setCurrentVideo] = useState(null);
 
   const handleVideoSelect = (videoUrl) => {
@@ -16,14 +17,12 @@ function App() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full overflow-hidden touch-none bg-black">
+    <div className="w-full h-full bg-black">
+      <div className='absolute top-[10px] right-[40px] text-white text-sm'>v{version}</div>
       {currentView === 'catalog' ? (
         <Catalog onVideoSelect={handleVideoSelect} />
       ) : (
-        <VideoPlayer 
-          url={currentVideo} 
-          onBack={handleBackToCatalog} 
-        />
+        <VideoPlayer url={currentVideo} onBack={handleBackToCatalog} />
       )}
     </div>
   );
