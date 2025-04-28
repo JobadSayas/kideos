@@ -284,7 +284,40 @@ url: 'https://www.youtube.com/embed/aH-HotoRxUk?si=JlnqMzHL0CWy0CMJ&amp;controls
 cover: 'cars-6',
 group: 'cars'
 }
-        
+,{
+url: 'https://www.youtube.com/embed/YXJuVtDKjv8?si=Jq2glVTnbeC_HjWa&amp;controls=0',
+cover: 'mario-1',
+group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/afX7kwUAhSE?si=zJjjzobg9NjDwhZm&amp;controls=0',
+cover: 'mario-2',
+group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/VHovNBF5L6g?si=f2Mahx5xHvQmhlor&amp;controls=0',
+cover: 'mario-3',
+group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/D-uvIv8dOc4?si=N73BuB4naQK19Rk2&amp;controls=0',
+cover: 'mario-4',
+group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/7i3oM-u93xM?si=C9ATcjzNzeQzNuTG&amp;controls=0',
+cover: 'piano-1',
+group: 'piano'
+}
+,{
+url: 'https://www.youtube.com/embed/ynEdqeZ47OI?si=qs1H4NIzSll5E5p1&amp;controls=0',
+cover: 'piano-2',
+group: 'piano'
+}
+    
+
+
+
 
 
 

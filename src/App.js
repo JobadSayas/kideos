@@ -3,7 +3,7 @@ import VideoPlayer from './components/VideoPlayer';
 import Catalog from './components/Catalog';
 
 function App() {
-  const version = '2.1'
+  const version = '2.1.1'
   const [currentView, setCurrentView] = useState('catalog');
   const [currentVideo, setCurrentVideo] = useState(null);
 
