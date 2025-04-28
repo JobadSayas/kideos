@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const Video = ({ url }) => {
+const VideoPlayer = ({ url, onBack }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
 
@@ -14,32 +14,29 @@ const Video = ({ url }) => {
         playerRef.current = new window.YT.Player('player', {
           videoId: url.split('/embed/')[1].split('?')[0],
           playerVars: {
-            'autoplay': 0,
+            'autoplay': 1, // Ahora autoplay está activado
             'controls': 0,
             'disablekb': 1,
             'modestbranding': 1,
             'fs': 0,
-            'cc_load_policy': 0,  // Bloquea CC inicialmente
+            'cc_load_policy': 0,
             'iv_load_policy': 3,
             'rel': 0,
-            'hl': 'en'  // Fuerza idioma inglés (sin CC automáticos)
+            'hl': 'en'
           },
           events: {
             'onReady': (event) => {
-              // Método INFALIBLE para eliminar CC
               event.target.setOption('captions', 'off');
               event.target.setOption('subtitles', 'off');
               event.target.unloadModule('captions');
-              // Elimina el botón de CC del DOM (solución nuclear)
               setTimeout(() => {
                 const ccButton = document.querySelector('.ytp-subtitles-button');
                 if (ccButton) ccButton.remove();
               }, 1000);
-              setIsPlaying(false);
+              setIsPlaying(true); // Comienza a reproducir automáticamente
             },
             'onStateChange': (event) => {
               setIsPlaying(event.data === window.YT.PlayerState.PLAYING);
-              // Verificación constante
               event.target.setOption('captions', 'off');
             }
           }
@@ -70,19 +67,35 @@ const Video = ({ url }) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center">
-      <div 
-        id="player" 
-        className="pointer-events-none w-[1100px] h-[620px] bg-black"
-      ></div>
-      <button
-        onClick={togglePlay}
-        className="px-6 py-2 text-white rounded-full transition-all w-[50px] h-[55px] flex justify-center items-center border-[3px] border-white absolute bottom-[10px] left-[10px] z-50 bg-black bg-opacity-25"
-      >
-        <i className={`text-2xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`}></i>
-      </button>
-    </div>
+    <div className="relative w-full h-full flex flex-col">
+  {/* Contenedor del reproductor */}
+  <div className="flex-grow flex items-center justify-center bg-black">
+    <div 
+      id="player" 
+      className="pointer-events-none w-full h-full max-w-[1100px] max-h-[620px] bg-black"
+    ></div>
+  </div>
+  
+  {/* Barra de controles inferior */}
+  <div className="w-full py-4 px-6 bg-gradient-to-t from-black to-transparent flex justify-between items-center">
+    {/* Botón de play/pause */}
+    <button
+      onClick={togglePlay}
+      className="px-6 py-2 text-white rounded-full w-[40px] h-[55px] flex justify-center items-center border-[3px] border-white bg-black bg-opacity-50 hover:bg-opacity-75"
+    >
+      <i className={`text-xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`}></i>
+    </button>
+    
+    {/* Botón para volver al catálogo */}
+    <button
+      onClick={onBack}
+      className="px-4 py-2 text-white bg-black bg-opacity-50 hover:bg-opacity-75 flex items-center gap-2"
+    >
+      <i className="fa-solid fa-table text-4xl"></i>
+    </button>
+  </div>
+</div>
   );
 };
 
-export default Video;
+export default VideoPlayer;
