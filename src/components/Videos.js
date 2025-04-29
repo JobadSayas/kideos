@@ -165,7 +165,7 @@ cover: 'musica-4',
 group: 'musica'
 }
 ,{
-url: 'https://www.youtube.com/embed/tCncgF17fow?si=7NdCgd75_0KR_x8r&amp;controls=0',
+url: 'https://www.youtube.com/embed/czGW1WkkWBo?si=qWl8oKFKl4_u4xzt&amp;controls=0',
 cover: 'musica-5',
 group: 'musica'
 }
@@ -313,6 +313,16 @@ group: 'piano'
 url: 'https://www.youtube.com/embed/ynEdqeZ47OI?si=qs1H4NIzSll5E5p1&amp;controls=0',
 cover: 'piano-2',
 group: 'piano'
+}
+,{
+url: 'https://www.youtube.com/embed/WfrR6VSLNkU?si=sSXarxFrNgbraVNp&amp;controls=0',
+cover: 'soccer-1',
+group: 'soccer'
+}
+,{
+url: 'https://www.youtube.com/embed/mxQOOMX4NQM?si=uqWoco-LrDHNll8I&amp;controls=0',
+cover: 'soccer-2',
+group: 'soccer'
 }
     
 
