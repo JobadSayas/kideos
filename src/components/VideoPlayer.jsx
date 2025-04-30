@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const VideoPlayer = ({ url, onBack, timeLeft, setTimeLeft }) => {
+const VideoPlayer = ({ url, onBack, timeLeft, setIsTimerRunning }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
 
@@ -9,9 +9,10 @@ const VideoPlayer = ({ url, onBack, timeLeft, setTimeLeft }) => {
       if (playerRef.current && isPlaying) {
         playerRef.current.pauseVideo();
         setIsPlaying(false);
+        setIsTimerRunning(false);
       }
     }
-  }, [timeLeft, isPlaying]);
+  }, [timeLeft, isPlaying, setIsTimerRunning]);
 
   useEffect(() => {
     const initPlayer = () => {
@@ -45,7 +46,9 @@ const VideoPlayer = ({ url, onBack, timeLeft, setTimeLeft }) => {
               setIsPlaying(false);
             },
             'onStateChange': (event) => {
-              setIsPlaying(event.data === window.YT.PlayerState.PLAYING);
+              const newIsPlaying = event.data === window.YT.PlayerState.PLAYING;
+              setIsPlaying(newIsPlaying);
+              setIsTimerRunning(newIsPlaying);
               event.target.setOption('captions', 'off');
             }
           }
@@ -66,8 +69,9 @@ const VideoPlayer = ({ url, onBack, timeLeft, setTimeLeft }) => {
       if (playerRef.current) {
         playerRef.current.destroy();
       }
+      setIsTimerRunning(false);
     };
-  }, [url]);
+  }, [url, setIsTimerRunning]);
 
   const togglePlay = () => {
     if (playerRef.current) {
@@ -84,16 +88,18 @@ const VideoPlayer = ({ url, onBack, timeLeft, setTimeLeft }) => {
   return (
     <div className="relative w-full h-full flex flex-col">
       {timeLeft <= 0 && (
-        <div className="absolute inset-0 bg-black z-50 flex items-center justify-center">
-          <i className="fa-solid fa-clock text-white text-8xl"></i>
+        <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center">
+          <i className="fa-solid fa-clock text-white text-8xl mb-4"></i>
         </div>
       )}
+      
       <div className="flex-grow flex items-center justify-center bg-black">
         <div 
           id="player" 
           className="pointer-events-none w-full h-full max-w-[1100px] max-h-[620px] bg-black"
         ></div>
       </div>
+      
       <div className="w-full py-4 px-6 bg-gradient-to-t from-black to-transparent flex justify-between items-center">
         <button
           onClick={togglePlay}
@@ -102,6 +108,7 @@ const VideoPlayer = ({ url, onBack, timeLeft, setTimeLeft }) => {
         >
           <i className={`text-xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`}></i>
         </button>
+        
         <button
           onClick={onBack}
           className="px-4 py-2 text-white bg-black bg-opacity-50 hover:bg-opacity-75 flex items-center gap-2"
