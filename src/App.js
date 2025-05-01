@@ -3,14 +3,13 @@ import VideoPlayer from './components/VideoPlayer';
 import Catalog from './components/Catalog';
 
 function App() {
-  const version = '2.3.1';
+  const version = '2.4';
   const [currentView, setCurrentView] = useState('catalog');
-  const [currentVideo, setCurrentVideo] = useState(null);
+  const [currentVideo, setCurrentVideo] = useState({ url: null, cover: null });
   const [timeLeft, setTimeLeft] = useState(45 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [customTime, setCustomTime] = useState(45);
 
-  // Función para verificar y resetear el tiempo si es un nuevo día
   const checkForNewDayReset = () => {
     const savedTimeLimit = localStorage.getItem('timeLimit');
     const lastResetDate = localStorage.getItem('lastResetDate');
@@ -29,15 +28,10 @@ function App() {
     }
   };
 
-  // Initialize and set up day change checks
   useEffect(() => {
-    // Verificación inicial al cargar
     checkForNewDayReset();
-
-    // Verificar cada hora (3600000 ms = 1 hora)
     const interval = setInterval(checkForNewDayReset, 3600000);
 
-    // Event listener para cuando el usuario regresa a la pestaña
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         checkForNewDayReset();
@@ -52,7 +46,6 @@ function App() {
     };
   }, []);
 
-  // Timer logic - now controlled by VideoPlayer
   useEffect(() => {
     let interval;
     if (isTimerRunning && timeLeft > 0) {
@@ -70,9 +63,9 @@ function App() {
     return () => clearInterval(interval);
   }, [isTimerRunning, timeLeft]);
 
-  const handleVideoSelect = (videoUrl) => {
+  const handleVideoSelect = (videoUrl, videoCover) => {
     if (timeLeft > 0) {
-      setCurrentVideo(videoUrl);
+      setCurrentVideo({ url: videoUrl, cover: videoCover });
       setCurrentView('player');
     }
   };
@@ -99,7 +92,6 @@ function App() {
         localStorage.setItem('timeLimit', minutes.toString());
         localStorage.setItem('timeLeft', newTimeLeft.toString());
         
-        // Reset daily tracking
         const today = new Date().toDateString();
         localStorage.setItem('lastResetDate', today);
       }
@@ -110,20 +102,17 @@ function App() {
 
   return (
     <div className="w-full h-full bg-black relative">
-      {/* Time Config Button */}
       <button 
         onClick={handleTimeConfig}
-        className="absolute top-[0] left-[0] bg-black z-[60] w-[23px] h-[50px] bg-black"
+        className="absolute top-[0] left-[0] bg-black z-[60] w-[23px] h-[50px]"
       ></button>
 
-      {/* Timer Display */}
       <div className={`absolute top-[10px] left-1/2 transform -translate-x-1/2 ${timerColor} text-lg font-bold bg-black bg-opacity-70 px-4 py-1 rounded-full z-50 flex items-center gap-2`}>
         <i className="fa-solid fa-clock"></i>
         <span>{formatTime(timeLeft)}</span>
       </div>
 
-      {/* Version Info */}
-      <div className='absolute top-[10px] right-[10px] text-white text-sm'>
+      <div className='absolute top-[10px] right-[30px] text-white text-sm'>
         v{version}
       </div>
 
@@ -131,7 +120,8 @@ function App() {
         <Catalog onVideoSelect={handleVideoSelect} />
       ) : (
         <VideoPlayer 
-          url={currentVideo} 
+          url={currentVideo.url}
+          videoCover={currentVideo.cover}
           onBack={handleBackToCatalog}
           timeLeft={timeLeft}
           setIsTimerRunning={setIsTimerRunning}
