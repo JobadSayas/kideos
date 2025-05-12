@@ -18,7 +18,7 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning }) =
     
     try {
       const response = await axios.post(
-        'https://videokids.visssible.com/backend/videoHistory.php',
+        'https://videokids.visssible.com/backend/insert-history.php',
         { videoName: videoCover },
         {
           headers: {
