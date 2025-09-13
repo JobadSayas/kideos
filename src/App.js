@@ -3,17 +3,19 @@ import VideoPlayer from './components/VideoPlayer';
 import Catalog from './components/Catalog';
 
 function App() {
-  const version = '2.4.1';
+  const version = '2.5.0';
   const [currentView, setCurrentView] = useState('catalog');
   const [currentVideo, setCurrentVideo] = useState({ url: null, cover: null });
   const [timeLeft, setTimeLeft] = useState(45 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [customTime, setCustomTime] = useState(45);
+  const [userType, setUserType] = useState(''); // Nuevo estado para el tipo de usuario
 
   const checkForNewDayReset = () => {
     const savedTimeLimit = localStorage.getItem('timeLimit');
     const lastResetDate = localStorage.getItem('lastResetDate');
     const savedTimeLeft = localStorage.getItem('timeLeft');
+    const savedUserType = localStorage.getItem('userType'); // Obtener tipo de usuario guardado
     
     const today = new Date().toDateString();
     
@@ -25,6 +27,11 @@ function App() {
       localStorage.setItem('timeLeft', newTimeLimit.toString());
     } else if (savedTimeLeft) {
       setTimeLeft(parseInt(savedTimeLeft));
+    }
+
+    // Cargar tipo de usuario si existe en localStorage
+    if (savedUserType) {
+      setUserType(savedUserType);
     }
   };
 
@@ -98,6 +105,22 @@ function App() {
     }
   };
 
+  const handleUserConfig = () => {
+    const userInput = prompt('Ingrese el tipo de usuario (e o l):', userType || '');
+    
+    if (userInput !== null) { // Si el usuario no canceló
+      const normalizedInput = userInput.trim().toLowerCase();
+      
+      if (normalizedInput === 'e' || normalizedInput === 'l') {
+        setUserType(normalizedInput);
+        localStorage.setItem('userType', normalizedInput);
+        console.log('Tipo de usuario:', normalizedInput);
+      } else if (normalizedInput !== '') {
+        alert('Por favor, ingrese solo "e" o "l"');
+      }
+    }
+  };
+
   const timerColor = timeLeft <= 5 * 60 ? 'text-red-500' : 'text-white';
 
   return (
@@ -105,6 +128,11 @@ function App() {
       <button 
         onClick={handleTimeConfig}
         className="absolute top-[0] left-[0] bg-black z-[60] w-[23px] h-[50px]"
+      ></button>
+
+      <button 
+        onClick={handleUserConfig}
+        className="absolute top-[0] right-[0] bg-black z-[60] w-[23px] h-[50px]"
       ></button>
 
       <div className={`absolute top-[10px] left-1/2 transform -translate-x-1/2 ${timerColor} text-lg font-bold bg-black bg-opacity-70 px-4 py-1 rounded-full z-50 flex items-center gap-2`}>
@@ -117,7 +145,7 @@ function App() {
       </div>
 
       {currentView === 'catalog' ? (
-        <Catalog onVideoSelect={handleVideoSelect} />
+        <Catalog onVideoSelect={handleVideoSelect} userType={userType} />
       ) : (
         <VideoPlayer 
           url={currentVideo.url}
@@ -127,6 +155,7 @@ function App() {
           setIsTimerRunning={setIsTimerRunning}
         />
       )}
+
     </div>
   );
 }

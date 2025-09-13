@@ -75,6 +75,64 @@ cover: 'pequenos-heroes-8',
 group: 'pequenos-heroes'
 }
 ,{
+url: 'https://www.youtube.com/embed/86RvTG62IfA?si=Nw9S_P0zI3n-9KBF&amp;controls=0',
+cover: 'pequenos-heroes-15',
+group: 'pequenos-heroes'
+,id: 'Noe'
+}
+,{
+url: 'https://www.youtube.com/embed/CNQsfbPx1aM?si=ZpRDtwy19Qd50Zqx&amp;controls=0',
+cover: 'pequenos-heroes-12',
+group: 'pequenos-heroes'
+,id: 'Abraham'
+}
+,{
+url: 'https://www.youtube.com/embed/HSdnwvF0hXg?si=7e54yLbbNEnPIgMf&amp;controls=0',
+cover: 'pequenos-heroes-13',
+group: 'pequenos-heroes'
+,id: 'Jose'
+}
+,{
+url: 'https://www.youtube.com/embed/dib6xNgTMbU?si=TeEUvyN-8mr0F1rL&amp;controls=0',
+cover: 'pequenos-heroes-16',
+group: 'pequenos-heroes'
+,id: 'Moises'
+}
+,{
+url: 'https://www.youtube.com/embed/cv271TXComc?si=mVhNPQUcnqrNrtey&amp;controls=0',
+cover: 'pequenos-heroes-14',
+group: 'pequenos-heroes'
+,id: 'Elias'
+}
+,{
+url: 'https://www.youtube.com/embed/TyoVUf3CSok?si=vQReExgL8OrMkGy0&amp;controls=0',
+cover: 'pequenos-heroes-10',
+group: 'pequenos-heroes'
+,id: 'Daniel'
+}
+,{
+url: 'https://www.youtube.com/embed/1eNaSYnyLRM?si=jd3wzWIq-CTKqr5O&amp;controls=0',
+cover: 'pequenos-heroes-17',
+group: 'pequenos-heroes'
+,id: 'Jose y Maria'
+}
+,{
+url: 'https://www.youtube.com/embed/OWFl9nPNkOM?si=V0l3Vi4MK9hgmGN4&amp;controls=0',
+cover: 'pequenos-heroes-11',
+group: 'pequenos-heroes'
+,id: 'Pedro'
+}
+,{
+url: 'https://www.youtube.com/embed/fFbyiM7g3dg?si=vrLofhrp-kLh8ULk&amp;controls=0',
+cover: 'pequenos-heroes-9',
+group: 'pequenos-heroes'
+,id: 'Pablo'
+}
+
+
+
+
+,{
 url: 'https://www.youtube.com/embed/r47yUmJjotk?si=YDQ1hhfKpPSe6q27&amp;controls=0;start=5',
 cover: 'cars-1',
 group: 'cars'
@@ -110,19 +168,15 @@ cover: 'super-libro-5',
 group: 'super-libro'
 }
 ,{
-url: 'https://www.youtube.com/embed/eJZ6BxLGwUM?si=k0tteCJnED_c9wGO&amp;controls=0',
-cover: 'super-friends-2',
-group: 'super-friends'
-}
-,{
 url: 'https://www.youtube.com/embed/XcFKVjPLJw0?si=8vC4S88kdMYy7wxZ&amp;controls=0',
 cover: 'super-friends-3',
 group: 'super-friends'
 }
 ,{
-url: 'https://www.youtube.com/embed/XcFKVjPLJw0?si=8vC4S88kdMYy7wxZ&amp;controls=0',
+url: 'https://www.youtube.com/embed/uSIYtNIAjKI?si=QtqP4kX4z-i43hzg&amp;controls=0',
 cover: 'super-libro-6',
-group: 'super-libro'
+group: 'super-libro',
+id: 'Gedeon'
 }
 ,{
 url: 'https://www.youtube.com/embed/Qk8rPZfrWUs?si=k_SMawQTi9VWO9zl&amp;controls=0',
@@ -147,22 +201,26 @@ group: 'cars'
 ,{
 url: 'https://www.youtube.com/embed/U2R8E7EFldY?si=56P0kgkZ6pY_Q0rz&amp;controls=0',
 cover: 'musica-1',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/dOreoIjbCjU?si=PBItsM5ZXpP_KHOO&amp;controls=0',
 cover: 'musica-2',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/PEVqIGORcr0?si=4XJ_V-RRm0fI3xTM&amp;controls=0',
 cover: 'musica-3',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/EwHGHXMyg4E?si=s5JssAslD_e6BD0v&amp;controls=0',
 cover: 'musica-4',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/czGW1WkkWBo?si=qWl8oKFKl4_u4xzt&amp;controls=0',
@@ -177,7 +235,8 @@ group: 'musica'
 ,{
 url: 'https://www.youtube.com/embed/yNF5mwGUbJo?si=4JMi4W9tMqtJhbmO&amp;controls=0',
 cover: 'musica-7',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/ZsdWJOoZAPg?si=lJ4tMfrQZl3OJ3PB&amp;controls=0',
@@ -257,17 +316,20 @@ group: 'paw-patrol'
 ,{
 url: 'https://www.youtube.com/embed/r7pENI0RHR8?si=s5uCLFso4KkwZAC3&amp;controls=0',
 cover: 'musica-8',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/gwu7q2o8CHI?si=zBPUh_OqZZZ-ITfr&amp;controls=0',
 cover: 'musica-9',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/0X8uwcpnyfE?si=mF8nTjJIx6IR-jx0&amp;controls=0',
 cover: 'musica-10',
-group: 'musica'
+group: 'musica',
+ethan: true
 }
 ,{
 url: 'https://www.youtube.com/embed/ANRBY_BWmB0?si=v5goV0eypH08Xzzs&amp;controls=0',
@@ -324,7 +386,348 @@ url: 'https://www.youtube.com/embed/mxQOOMX4NQM?si=uqWoco-LrDHNll8I&amp;controls
 cover: 'soccer-2',
 group: 'soccer'
 }
+,{
+url: 'https://www.youtube.com/embed/e-3sYL7vJTQ?si=nBZjbNT-mJOh5M2Q&amp;controls=0',
+cover: 'mario-5',
+group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/mhi7Q7sjop4?si=LrYR0bvlBq697AmP&amp;controls=0',
+cover: 'paw-patrol-16',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/ZK296luxJQg?si=63-3m-Y9BVnrTFY6&amp;controls=0',
+cover: 'paw-patrol-17',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/eUDWVLLXUe8?si=Vln-F_AHK1BIR4qq&amp;controls=0',
+cover: 'paw-patrol-18',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/GetAwMNY2kY?si=azw-9fAWDhUtKvdJ&amp;controls=0',
+cover: 'paw-patrol-19',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/e8tqOCOTRR8?si=8do9zosJ0Ywo163G&amp;controls=0',
+cover: 'paw-patrol-20',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/NqPxC7YLdfM?si=qdRMIhvqGC_AfLQT&amp;controls=0',
+cover: 'paw-patrol-21',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/_iuGNQrc7cw?si=iSIEaamtk4WHigWe&amp;controls=0',
+cover: 'paw-patrol-22',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/uzKHfXFomdI?si=d4SkWwEfYhqiN84g&amp;controls=0',
+cover: 'paw-patrol-23',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/j-tvkROIBWw?si=5xuqLzLSnof_zMPz&amp;controls=0',
+cover: 'blaze-7',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/dNmVBdrv6dI?si=lve3usqVw56q44ga&amp;controls=0',
+cover: 'blaze-6',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/CjMSx7PVp24?si=4M9UaNQbZwUGB8V2&amp;controls=0',
+cover: 'super-libro-7',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/0HssHyuEXvI?si=ps7QW4JZiAFqvH-G&amp;controls=0',
+cover: 'super-libro-8',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/HZlegJPijcU?si=Ti7QzSC2WaWgCCbp&amp;controls=0',
+cover: 'super-libro-9',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/s5skboxbipg?si=VasCxJ5O0QtUWuud&amp;controls=0',
+cover: 'super-libro-10',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/8EpOvP3kCio?si=FviFUfjPXTeHdIuD&amp;controls=0',
+cover: 'super-libro-11',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/pvbsmiIOKIc?si=VsaBiIsJ79BWRJTo&amp;controls=0',
+cover: 'super-libro-12',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/Sv3qphmN4Zo?si=eH3ykev7KeFoWwgy&amp;controls=0',
+cover: 'super-libro-13',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/9CEU8BEUqY4?si=R5JOQzraSBSqpUMW&amp;controls=0',
+cover: 'super-libro-14',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/uduqW8EURzM?si=foDIAjRzv1QtT6dl&amp;controls=0',
+cover: 'super-libro-15',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/VBMw3RdzRzs?si=2aO3qYugJwjnQY-n&amp;controls=0',
+cover: 'super-libro-16',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/HiLEq0WdVmI?si=E-Td3fNK9f0BYZTv&amp;controls=0',
+cover: 'super-libro-17',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/zOHh6NOKkKE?si=P8WWkA0sbD_QG_3f&amp;controls=0',
+cover: 'super-libro-18',
+group: 'super-libro'
+}
+,{
+url: 'https://www.youtube.com/embed/eCcEnVTs9_I?si=jZAlupeQQXcjlpDC&amp;controls=0',
+cover: 'paw-patrol-24',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/qmgt7U7IFZY?si=M2tSTihUgaQDtm8s&amp;controls=0',
+cover: 'paw-patrol-25',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/rkR7cQw5viM?si=RyuA_WpMWvDrZDKX&amp;controls=0',
+cover: 'paw-patrol-26',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/L4S9Ex1rtzY?si=BUmDLOrvwMKC2WKi&amp;controls=0',
+cover: 'blaze-8',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/nyohs6kGis8?si=8a_nL6eBTa-Q4LHY&amp;controls=0',
+cover: 'blaze-9',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/U0ZDk-bC0_0?si=FVtYawqx5rCRAFp6&amp;controls=0',
+cover: 'blaze-10',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/x_rVCe4PMhI?si=X2zoNnAoo82S56LC&amp;controls=0',
+cover: 'blaze-11',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/ivHTpfZq8FU?si=_dm18rh2r01YunJc&amp;controls=0',
+cover: 'blaze-12',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/4t0iz9HNbrk?si=qeoMQGYv58LNFglh&amp;controls=0',
+cover: 'blaze-13',
+group: 'blaze'
+}
+,{
+url: 'https://www.youtube.com/embed/KtBW1eOChGY?si=kEN8U4Z85N5gXVNe&amp;controls=0',
+cover: 'blaze-14',
+group: 'blaze'
+}
+,{
+  url: 'https://www.youtube.com/embed/8dlQYGzTsdc?si=Mp-04am9734MH8ni&amp;controls=0',
+  cover: 'mario-7',
+  group: 'mario'
+}
+,{
+  url: 'https://www.youtube.com/embed/CL_rXDzNqvw?si=8VrzNTrWEtjUDjuE&amp;controls=0',
+  cover: 'mario-8',
+  group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/-h4zTEwgCpQ?si=PyqeyvQ-GqANqKN4&amp;controls=0',
+cover: 'mario-6',
+group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/u_J_iJgm9wQ?si=HU2zuYo8OGORc0Wv&amp;controls=0',
+cover: 'mario-9',
+group: 'mario'
+}
+,{
+url: 'https://www.youtube.com/embed/qME30J1quQY?si=jlNLz7jJQX0ltXFf&amp;controls=0',
+cover: 'super-friends-4',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/MpXHcKcDr2s?si=nVXMia0QgllNMYUN&amp;controls=0',
+cover: 'super-friends-7',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/bmQYT01J1qg?si=k-CKTzpimamezfgC&amp;controls=0',
+cover: 'super-friends-8',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/bLRM7druKvA?si=1byswagYSmQLlB62&amp;controls=0',
+cover: 'super-friends-10',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/XSpvRyEj5Xc?si=RBsldhGAolcY7pnl&amp;controls=0',
+cover: 'super-friends-11',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/xWvjg-3yjXM?si=P4ces5lq0WWmEcIj&amp;controls=0',
+cover: 'paw-patrol-27',
+group: 'paw-patrol'
+}
+,{
+url: 'https://www.youtube.com/embed/hK5FfAOtwYo?si=QsQmqN7wJ-Pzhe7j&amp;controls=0',
+cover: 'super-friends-12',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/oYZ3wckLHNc?si=r0OHBfGqTKGzPPHG&amp;controls=0',
+cover: 'super-friends-13',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/Y1dBU2xur50?si=3Rc0mcLqxFa6P7Vq&amp;controls=0',
+cover: 'super-friends-14',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/yaw4xnUJIlI?si=5Ze8dL8wKlNL_nX3&amp;controls=0',
+cover: 'super-friends-15',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/eJZ6BxLGwUM?si=JQqiFn7Shw-YWtxc&amp;controls=0',
+cover: 'super-friends-16',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/s1TuUuChp14?si=3u1idx6zEBu-WelX&amp;controls=0',
+cover: 'super-friends-17',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/q_4bmmeEva8?si=unai4xgMeAsUFnlQ&amp;controls=0',
+cover: 'super-friends-18',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/fOd5Wzj9W1c?si=ya7iYJbipK--U9S3&amp;controls=0',
+cover: 'super-friends-19',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/JaBABG54eFU?si=JQxxlg8z9d_qQyMW&amp;controls=0',
+cover: 'super-friends-20',
+group: 'super-friends'
+} 
+,{
+url: 'https://www.youtube.com/embed/6_VL4PQkbFo?si=ZkWuvIK4utv_rINg&amp;controls=0',
+cover: 'super-friends-21',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/cOLHsaaPqLI?si=fcRbDbhdbNOyyrHC&amp;controls=0',
+cover: 'super-friends-22',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/z4hvI4QwNZ4?si=mkTL-5z6UOQtX2KO&amp;controls=0',
+cover: 'super-friends-batwheels-1',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/WHjJ_OSynho?si=aR4iU_3i_YoKd-Z7&amp;controls=0',
+cover: 'super-friends-batwheels-2',
+group: 'super-friends'
+}
+,{
+url: 'https://www.youtube.com/embed/2Yt1ECcWv-M?si=foIiHjnqPOGaV-ST&amp;controls=0',
+cover: 'cars-7',
+group: 'cars'
+} 
+,{
+url: 'https://www.youtube.com/embed/8VRJTXxMIsA?si=7knj3PG0osQ2J9g4&amp;controls=0',
+cover: 'super-friends-batwheels-3',
+group: 'super-friends'
+}     
+,{
+url: 'https://www.youtube.com/embed/I9fxAg2WxlQ?si=TRCOfUqNGx9D-QU7&amp;controls=0',
+cover: 'super-friends-batwheels-4',
+group: 'super-friends'
+}    
+,{
+url: 'https://www.youtube.com/embed/I2P_bA7ePtE?si=IPuU5Ing6mJ-WOIF&amp;controls=0',
+cover: 'super-friends-batwheels-5',
+group: 'super-friends'
+}    
+,{
+url: 'https://www.youtube.com/embed/8yfOEfTNrm4?si=XS-CVV9E-t_LjpAF&amp;controls=0',
+cover: 'super-friends-batwheels-6',
+group: 'super-friends'
+}    
+,{
+url: 'https://www.youtube.com/embed/TMxx34NIOVM?si=l16_1lQlQ5QyAvzK&amp;controls=0',
+cover: 'super-friends-batwheels-7',
+group: 'super-friends'
+}    
+,{
+url: 'https://www.youtube.com/embed/G_eopXPUffM?si=uUWovlUHBem_Bn1c&amp;controls=0',
+cover: 'super-friends-batwheels-8',
+group: 'super-friends'
+}  
+,{
+url: 'https://www.youtube.com/embed/u4jt6iqI5bQ?si=Ioe19kOrfyAPE1hy&amp;controls=0',
+cover: 'musica-11',
+group: 'musica',
+ethan: true
+}
+
+
+
+
+
+// Notes
+// Play list batwheels espanol
+// https://www.youtube.com/watch?v=G_eopXPUffM&list=PLVYS_RrmqvKe9XB3PWckm62xN7VAVG96D&index=47
+
+
+
+
+
+
+
+
+  
     
+
+
+
 
 
 
