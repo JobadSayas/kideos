@@ -124,8 +124,8 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
     }
   };
 
-  // Determinar si el video debe estar oculto
-  const isVideoHidden = filterMode === 'r'; // Modo radio: ocultar video
+  // Determinar si el video debe estar oculto (modo radio o música)
+  const isVideoHidden = filterMode === 'r' || filterMode === 'm';
 
   return (
     <div className="relative w-full h-full flex flex-col">
@@ -136,13 +136,30 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
       )}
       
       <div className="flex-grow flex items-center justify-center bg-black relative">
-        {/* Overlay negro para modo radio */}
+        {/* Overlay para modo radio o música */}
         {isVideoHidden && (
           <div className="absolute inset-0 bg-black z-10 flex items-center justify-center">
             <div className="text-white text-center">
-              <i className="fa-solid fa-radio text-6xl mb-4 text-purple-500"></i>
-              <p className="text-xl">Modo Radio</p>
-              <p className="text-sm text-gray-400 mt-2">Reproduciendo audio</p>
+              {filterMode === 'r' ? (
+                // Modo Radio
+                <>
+                  <i className="fa-solid fa-radio text-6xl mb-4 text-purple-500"></i>
+                  <p className="text-xl">Modo Radio</p>
+                  <p className="text-sm text-gray-400 mt-2">Reproduciendo audio</p>
+                </>
+              ) : (
+                // Modo Música
+                <>
+                  <img 
+                    src={`/covers/${videoCover}a.png`} 
+                    alt="Álbum" 
+                    className="w-[300px] h-[300px] rounded-lg mx-auto mb-4 object-cover"
+                    onError={(e) => {
+                      e.target.src = `/covers/${videoCover}.png`;
+                    }}
+                  />
+                </>
+              )}
             </div>
           </div>
         )}

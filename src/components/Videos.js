@@ -860,13 +860,31 @@ music: true,
 language: 'ES'
 }
 ,{
-url: 'https://www.youtube.com/embed/Vca8isbKjh4?si=ipVuXVJu9JfsONvi&amp;controls=0',
+url: 'https://www.youtube.com/embed/BknS8vY3NbU?si=2ABb1z7Tx_wPJGm4&amp;controls=0',
 cover: 'musica-13',
 album: 'musica-13a',
 group: 'musica',
 music: true,
 language: 'ES',
 id: 'burrito'
+}
+,{
+url: 'https://www.youtube.com/embed/XtBXxnmPYwU?si=_8VjUQBZhOXHwg_Y&amp;controls=0',
+cover: 'musica-14',
+album: 'musica-14a',
+group: 'musica',
+music: true,
+language: 'ES',
+id: 'daddy yankee sonrisa'
+}
+,{
+url: 'https://www.youtube.com/embed/a9a8RoczFAg?si=tnMO5Ri38yaoYSTs&amp;controls=0',
+cover: 'musica-15',
+album: 'musica-15a',
+group: 'musica',
+music: true,
+language: 'ES',
+id: 'live it out'
 }
 
 
@@ -879,10 +897,8 @@ id: 'burrito'
 /*
 Canciones agregar:
 
-Burrito sabanero
 feliz navidad
 padre fiel
-Sonrisa Daddy Yankee
 Locos por Jesus
 Dios no esta muerto
 Danzo en el rio
