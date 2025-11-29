@@ -6,6 +6,32 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
   const playerRef = useRef(null);
   const [apiCalled, setApiCalled] = useState(false);
 
+  // Calcular opacidad del layer durante el último minuto (60 segundos)
+  const getLayerOpacity = () => {
+    if (timeLeft > 60) return 0; // Más de 1 minuto: completamente transparente
+    if (timeLeft <= 0) return 1; // Tiempo agotado: completamente opaco
+    
+    // Durante el último minuto: calcular opacidad gradual (0 a 1)
+    // Cuando timeLeft = 60 -> opacity = 0
+    // Cuando timeLeft = 0 -> opacity = 1
+    return 1 - (timeLeft / 60);
+  };
+
+  // Calcular volumen durante el último minuto (100% a 0%)
+  const getVolume = () => {
+    if (timeLeft > 60) return 100; // Más de 1 minuto: volumen máximo
+    if (timeLeft <= 0) return 0;   // Tiempo agotado: volumen cero
+    
+    // Durante el último minuto: calcular volumen gradual (100 a 0)
+    // Cuando timeLeft = 60 -> volume = 100
+    // Cuando timeLeft = 0 -> volume = 0
+    return Math.max(0, Math.min(100, (timeLeft / 60) * 100));
+  };
+
+  const layerOpacity = getLayerOpacity();
+  const volume = getVolume();
+  const showLayer = layerOpacity > 0; // Mostrar layer si tiene alguna opacidad
+
   const registerVideoPlay = async () => {
     if (!videoCover) {
       console.error('No se recibió videoCover');
@@ -41,6 +67,14 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
   useEffect(() => {
     setApiCalled(false);
   }, [url]);
+
+  // Efecto para controlar el volumen del video
+  useEffect(() => {
+    if (playerRef.current && playerRef.current.setVolume) {
+      console.log(`Ajustando volumen a: ${volume}%`);
+      playerRef.current.setVolume(volume);
+    }
+  }, [volume]);
 
   useEffect(() => {
     if (timeLeft <= 0 && isPlaying && playerRef.current) {
@@ -83,6 +117,9 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
         },
         events: {
           onReady: (event) => {
+            // Establecer volumen inicial
+            event.target.setVolume(volume);
+            
             event.target.setOption('captions', 'off');
             event.target.setOption('subtitles', 'off');
             event.target.unloadModule('captions');
@@ -129,8 +166,12 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
 
   return (
     <div className="relative w-full h-full flex flex-col">
-      {timeLeft <= 0 && (
-        <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center">
+      {/* Layer gradual durante el último minuto */}
+      {showLayer && (
+        <div 
+          className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center transition-opacity duration-1000"
+          style={{ opacity: layerOpacity }}
+        >
           <i className="fa-solid fa-clock text-white text-8xl mb-4"></i>
         </div>
       )}
