@@ -3,7 +3,7 @@ import VideoPlayer from './components/VideoPlayer';
 import Catalog from './components/Catalog';
 
 function App() {
-  const version = 'v2.99.3';
+  const version = 'v2.99.4';
   const [currentView, setCurrentView] = useState('catalog');
   const [currentVideo, setCurrentVideo] = useState({ url: null, cover: null });
   const [timeLeft, setTimeLeft] = useState(45 * 60);

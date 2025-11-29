@@ -165,7 +165,7 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
   const isVideoHidden = filterMode === 'r' || filterMode === 'm';
 
   return (
-    <div className="relative w-full h-full flex flex-col">
+    <div className="relative w-full h-full bg-black">
       {/* Layer gradual durante el último minuto */}
       {showLayer && (
         <div 
@@ -173,10 +173,12 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
           style={{ opacity: layerOpacity }}
         >
           <i className="fa-solid fa-clock text-white text-8xl mb-4"></i>
+          <p className="text-white text-2xl">Tiempo terminando...</p>
         </div>
       )}
       
-      <div className="flex-grow flex items-center justify-center bg-black relative">
+      {/* Video a pantalla completa */}
+      <div className="w-full h-full relative">
         {/* Overlay para modo radio o música */}
         {isVideoHidden && (
           <div className="absolute inset-0 bg-black z-10 flex items-center justify-center">
@@ -205,28 +207,32 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
           </div>
         )}
         
+        {/* Video a pantalla completa CON pointer-events desactivado */}
         <div 
           id="player" 
-          className={`w-full h-full max-w-[1100px] max-h-[620px] bg-black ${
+          className={`w-full h-full bg-black pointer-events-none ${
             isVideoHidden ? 'opacity-0' : 'opacity-100'
           }`}
         />
       </div>
       
-      <div className="w-full py-4 px-6 bg-gradient-to-t from-black to-transparent flex justify-between items-center">
+      {/* Botones flotantes */}
+      <div className="fixed bottom-6 left-6 z-40">
         <button
           onClick={togglePlay}
-          className="px-6 py-2 text-white rounded-full w-[40px] h-[55px] flex justify-center items-center border-[3px] border-white bg-black bg-opacity-50 hover:bg-opacity-75"
+          className="px-6 py-2 text-white rounded-full w-[60px] h-[60px] flex justify-center items-center border-[3px] border-white bg-black bg-opacity-70 hover:bg-opacity-90 transition-all"
           disabled={timeLeft <= 0}
         >
-          <i className={`text-xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`} />
+          <i className={`text-2xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`} />
         </button>
-        
+      </div>
+      
+      <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={onBack}
-          className="px-4 py-2 text-white bg-black bg-opacity-50 hover:bg-opacity-75 flex items-center gap-2"
+          className="px-6 py-2 text-white rounded-full w-[60px] h-[60px] flex justify-center items-center border-[3px] border-white bg-black bg-opacity-70 hover:bg-opacity-90 transition-all"
         >
-          <i className="fa-solid fa-table text-4xl" />
+          <i className="fa-solid fa-table text-2xl" />
         </button>
       </div>
     </div>
