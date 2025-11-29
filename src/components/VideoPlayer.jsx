@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning }) => {
+const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, filterMode }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
   const [apiCalled, setApiCalled] = useState(false);
@@ -124,6 +124,9 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning }) =
     }
   };
 
+  // Determinar si el video debe estar oculto
+  const isVideoHidden = filterMode === 'r'; // Modo radio: ocultar video
+
   return (
     <div className="relative w-full h-full flex flex-col">
       {timeLeft <= 0 && (
@@ -132,10 +135,23 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning }) =
         </div>
       )}
       
-      <div className="flex-grow flex items-center justify-center bg-black">
+      <div className="flex-grow flex items-center justify-center bg-black relative">
+        {/* Overlay negro para modo radio */}
+        {isVideoHidden && (
+          <div className="absolute inset-0 bg-black z-10 flex items-center justify-center">
+            <div className="text-white text-center">
+              <i className="fa-solid fa-radio text-6xl mb-4 text-purple-500"></i>
+              <p className="text-xl">Modo Radio</p>
+              <p className="text-sm text-gray-400 mt-2">Reproduciendo audio</p>
+            </div>
+          </div>
+        )}
+        
         <div 
           id="player" 
-          className="pointer-events-none w-full h-full max-w-[1100px] max-h-[620px] bg-black"
+          className={`w-full h-full max-w-[1100px] max-h-[620px] bg-black ${
+            isVideoHidden ? 'opacity-0' : 'opacity-100'
+          }`}
         />
       </div>
       

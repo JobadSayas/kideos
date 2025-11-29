@@ -1,27 +1,56 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Videos from './Videos';
 
-const Catalog = ({ onVideoSelect, userType }) => {
+const Catalog = ({ onVideoSelect, userType, filterMode, languageMode }) => {
   const [loadedImages, setLoadedImages] = useState({});
   const [groupedVideos, setGroupedVideos] = useState({});
   const [recommendedVideos, setRecommendedVideos] = useState([]);
 
-  // Filtrar videos según el tipo de usuario
-  const getFilteredVideos = () => {
-    if (userType === 'e') {
-      // Para usuario 'e', solo mostrar videos con ethan: true
-      return Videos.filter(video => video.ethan === true);
-    } else {
-      // Para otros usuarios, mostrar todos los videos
-      return Videos;
-    }
-  };
+  // Filtrar videos SOLO por filterMode y languageMode
+  const getFilteredVideos = useCallback(() => {
+    let filtered = Videos;
 
-  const getRandomVideos = () => {
+    // 1. Filtro por filterMode (videos/música/radio)
+    switch (filterMode) {
+      case 'm':
+        // Solo videos con music: true
+        filtered = filtered.filter(video => video.music === true);
+        break;
+      case 'v':
+      case 'r':
+        // Modo videos y radio muestran todos los videos
+        break;
+      default:
+        break;
+    }
+
+    // 2. Filtro por languageMode (español/inglés/todos)
+    switch (languageMode) {
+      case 'es':
+        // Solo videos en español
+        filtered = filtered.filter(video => video.language === 'ES');
+        break;
+      case 'en':
+        // Solo videos en inglés
+        filtered = filtered.filter(video => video.language === 'EN');
+        break;
+      case 't':
+        // Todos los idiomas - no filtrar
+        break;
+      default:
+        break;
+    }
+
+    console.log('Filtros aplicados:', { filterMode, languageMode, videosFiltrados: filtered.length });
+    
+    return filtered;
+  }, [filterMode, languageMode]);
+
+  const getRandomVideos = useCallback(() => {
     const filteredVideos = getFilteredVideos();
     const shuffled = [...filteredVideos].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 6);
-  };
+  }, [getFilteredVideos]);
 
   useEffect(() => {
     const filteredVideos = getFilteredVideos();
@@ -34,7 +63,7 @@ const Catalog = ({ onVideoSelect, userType }) => {
     }, {});
     
     setGroupedVideos(grouped);
-  }, [userType]); // Añadí userType como dependencia
+  }, [filterMode, languageMode, getFilteredVideos, getRandomVideos]);
 
   useEffect(() => {
     const filteredVideos = getFilteredVideos();
@@ -47,11 +76,10 @@ const Catalog = ({ onVideoSelect, userType }) => {
         setLoadedImages(prev => ({ ...prev, [index]: false }));
       };
     });
-  }, [userType]); // Añadí userType como dependencia
+  }, [filterMode, languageMode, getFilteredVideos]);
 
   return (
     <div className="w-full p-6 overflow-y-auto h-[calc(100vh-40px)]">
-      {/* Mostrar sección Recomendados solo si userType no es 'e' */}
       {userType !== 'e' && (
         <div className="border-white-200 border-b py-6">
           <h2 className="text-white text-2xl font-bold mb-4"><i className='fa fa-star'></i> Recomendados</h2>
@@ -71,7 +99,6 @@ const Catalog = ({ onVideoSelect, userType }) => {
                       setLoadedImages(prev => ({ ...prev, [Videos.indexOf(video)]: false }));
                     }}
                   />
-                  
                   {loadedImages[Videos.indexOf(video)] === false && (
                     <div className="w-full h-full bg-gray-800 flex items-center justify-center">
                       <span className="text-gray-400 text-sm">Imagen no disponible</span>
@@ -105,7 +132,6 @@ const Catalog = ({ onVideoSelect, userType }) => {
                       setLoadedImages(prev => ({ ...prev, [Videos.indexOf(video)]: false }));
                     }}
                   />
-                  
                   {loadedImages[Videos.indexOf(video)] === false && (
                     <div className="w-full h-full bg-gray-800 flex items-center justify-center">
                       <span className="text-gray-400 text-sm">Imagen no disponible</span>
