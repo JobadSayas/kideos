@@ -173,7 +173,6 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
           style={{ opacity: layerOpacity }}
         >
           <i className="fa-solid fa-clock text-white text-8xl mb-4"></i>
-          <p className="text-white text-2xl">Tiempo terminando...</p>
         </div>
       )}
       
