@@ -33,13 +33,15 @@ language: 'ES'
 url: 'https://www.youtube.com/embed/xCoztFfStBE?si=fLC1l5r1xHSzAVa2&amp;controls=0',
 cover: 'super-friends-movie',
 group: 'super-friends',
-language: 'ES'
+language: 'ES',
+id: 'pelicula'
 }
 ,{
 url: 'https://www.youtube.com/embed/a7pMwVVD1pk?si=6LlPVsMgsZs9UNvi&amp;controls=0',
 cover: 'super-friends-1',
 group: 'super-friends',
-language: 'ES'
+language: 'ES',
+id: 'cumpleanos'
 }
 ,{
 url: 'https://www.youtube.com/embed/TUlay--1ATQ?si=mufk5crojCxhU9gA&amp;controls=0',
@@ -664,16 +666,16 @@ group: 'blaze',
 language: 'ES'
 }
 ,{
-  url: 'https://www.youtube.com/embed/8dlQYGzTsdc?si=Mp-04am9734MH8ni&amp;controls=0',
-  cover: 'mario-7',
-  group: 'mario',
-  language: 'EN'
+url: 'https://www.youtube.com/embed/8dlQYGzTsdc?si=Mp-04am9734MH8ni&amp;controls=0',
+cover: 'mario-7',
+group: 'mario',
+language: 'EN'
 }
 ,{
-  url: 'https://www.youtube.com/embed/CL_rXDzNqvw?si=8VrzNTrWEtjUDjuE&amp;controls=0',
-  cover: 'mario-8',
-  group: 'mario',
-  language: 'EN'
+url: 'https://www.youtube.com/embed/CL_rXDzNqvw?si=8VrzNTrWEtjUDjuE&amp;controls=0',
+cover: 'mario-8',
+group: 'mario',
+language: 'EN'
 }
 ,{
 url: 'https://www.youtube.com/embed/-h4zTEwgCpQ?si=PyqeyvQ-GqANqKN4&amp;controls=0',
@@ -721,7 +723,7 @@ language: 'ES'
 url: 'https://www.youtube.com/embed/xWvjg-3yjXM?si=P4ces5lq0WWmEcIj&amp;controls=0',
 cover: 'paw-patrol-27',
 group: 'paw-patrol',
-language: 'ES'
+language: 'EN'
 }
 ,{
 url: 'https://www.youtube.com/embed/hK5FfAOtwYo?si=QsQmqN7wJ-Pzhe7j&amp;controls=0',
@@ -775,13 +777,15 @@ language: 'ES'
 url: 'https://www.youtube.com/embed/JaBABG54eFU?si=JQxxlg8z9d_qQyMW&amp;controls=0',
 cover: 'super-friends-20',
 group: 'super-friends',
-language: 'ES'
+language: 'EN',
+id: 'acertijo'
 } 
 ,{
 url: 'https://www.youtube.com/embed/6_VL4PQkbFo?si=ZkWuvIK4utv_rINg&amp;controls=0',
 cover: 'super-friends-21',
 group: 'super-friends',
-language: 'ES'
+language: 'ES',
+id: 'pinguino y harley'
 }
 ,{
 url: 'https://www.youtube.com/embed/cOLHsaaPqLI?si=fcRbDbhdbNOyyrHC&amp;controls=0',
@@ -886,6 +890,175 @@ music: true,
 language: 'ES',
 id: 'live it out'
 }
+,{
+url: 'https://www.youtube.com/embed/-HDk0nZ-kLY?si=vmV4aF2VguhBiKgc&amp;controls=0',
+cover: 'super-friends-batwheels-9',
+group: 'super-friends',
+language: 'EN',
+id: 'todos los vehiculos'
+}  
+,{
+url: 'https://www.youtube.com/embed/xivx2A6XPgg?si=zjZ5sY-EOpra0mXt&amp;controls=0',
+cover: 'super-friends-batwheels-10',
+group: 'super-friends',
+language: 'EN',
+id: 'Bane'
+}
+,{
+url: 'https://www.youtube.com/embed/PmyPHW6gWNk?si=MP7X3pdq1dXh0VgI&amp;controls=0',
+cover: 'super-friends-batwheels-11',
+group: 'super-friends',
+language: 'EN',
+id: 'origen batwheels'
+}  
+,{
+url: 'https://www.youtube.com/embed/oS04fq7suc0?si=e4JiH5WvpDx28YX6&amp;controls=0',
+cover: 'super-friends-batwheels-12',
+group: 'super-friends',
+language: 'EN',
+id: 'batmobile lead'
+} 
+,{
+url: 'https://www.youtube.com/embed/h1UbbiTg1HQ?si=QANRCLbnlB6S11vy&amp;controls=0',
+cover: 'super-friends-batwheels-16',
+group: 'super-friends',
+language: 'EN',
+id: 'origen robot'
+} 
+,{
+url: 'https://www.youtube.com/embed/NZUTknG2iXk?si=bBD4HuQyZpujnP6T&amp;controls=0',
+cover: 'super-friends-batwheels-13',
+group: 'super-friends',
+language: 'EN',
+id: 'lucha robots'
+} 
+,{
+url: 'https://www.youtube.com/embed/QFbjZ7bvduM?si=xJKjWSlvXjs8lXQg&amp;controls=0',
+cover: 'super-friends-batwheels-14',
+group: 'super-friends',
+language: 'EN',
+id: 'lucha señor frio'
+} 
+,{
+url: 'https://www.youtube.com/embed/MGypEy48pTc?si=4O1eKppqz6L-mW7X&amp;controls=0',
+cover: 'super-friends-batwheels-15',
+group: 'super-friends',
+language: 'EN',
+id: 'bam upgrades'
+} 
+,{
+url: 'https://www.youtube.com/embed/AgySPP67gjA?si=mCuBzISldenIF4vU&amp;controls=0',
+cover: 'super-friends-batwheels-17',
+group: 'super-friends',
+language: 'EN',
+id: 'grandei'
+} 
+,{
+url: 'https://www.youtube.com/embed/LEdl9dTpRqU?si=I1012lM6_8xvRNiN&amp;controls=0',
+cover: 'ninja-turtles-2',
+group: 'ninja-turtles',
+language: 'EN',
+id: 'armas diferentes'
+} 
+,{
+url: 'https://www.youtube.com/embed/FdL2GorGdKc?si=G8gGUUEyR38Ro9Is&amp;controls=0',
+cover: 'mario-10',
+group: 'mario',
+language: 'EN',
+id: 'galaxy trailer'
+} 
+,{
+url: 'https://www.youtube.com/embed/utAPc_DcIpM?si=eIcX40P7al-ngIY_&amp;controls=0',
+cover: 'super-friends-batwheels-18',
+group: 'super-friends',
+language: 'EN',
+id: 'Navidad'
+}
+,{
+url: 'https://www.youtube.com/embed/UaH4E70ZyR4?si=QY9ptK3Zb92uR8VY&amp;controls=0',
+cover: 'super-friends-batwheels-19',
+group: 'super-friends',
+language: 'EN',
+id: 'Perro'
+}
+,{
+url: 'https://www.youtube.com/embed/e1khdO1aeU8?si=FCy0AYKE80IQ8sBm&amp;controls=0',
+cover: 'super-friends-batwheels-20',
+group: 'super-friends',
+language: 'EN',
+id: 'trailer'
+}
+,{
+url: 'https://www.youtube.com/embed/Szhq36WpoWg?si=NcLrWDErvHClZPHx&amp;controls=0',
+cover: 'blaze-15',
+group: 'blaze',
+language: 'EN',
+id: 'Robot taco'
+}
+,{
+url: 'https://www.youtube.com/embed/NzwI4KjVNLk?si=n1njpQ5YXFR0HMFQ&amp;controls=0',
+cover: 'blaze-16',
+group: 'blaze',
+language: 'EN',
+id: 'Tren'
+}
+,{
+url: 'https://www.youtube.com/embed/HQMKA6w5ZZM?si=YaTlXwvJpm8NlW9r&amp;controls=0',
+cover: 'BibleProject-1',
+group: 'BibleProject',
+language: 'ES',
+id: 'Genesis 1'
+} 
+,{
+url: 'https://www.youtube.com/embed/MC8BqGu9B8A?si=V_PyHO3m26hlBxmr&amp;controls=0',
+cover: 'BibleProject-2',
+group: 'BibleProject',
+language: 'ES',
+id: 'Genesis 2'
+} 
+,{
+url: 'https://www.youtube.com/embed/y9pED55wMM4?si=VEa3lC6dCL9vscUT&amp;controls=0',
+cover: 'BibleProject-3',
+group: 'BibleProject',
+language: 'ES',
+id: 'Exodo 1'
+} 
+,{
+url: 'https://www.youtube.com/embed/U2lUpubEMDI?si=7WpiOy7MAVGFbSPH&amp;controls=0',
+cover: 'BibleProject-4',
+group: 'BibleProject',
+language: 'ES',
+id: 'Exodo 2'
+} 
+,{
+url: 'https://www.youtube.com/embed/vKT8eo3hAMw?si=XS_KqGuViOnV00c7&amp;controls=0',
+cover: 'BibleProject-5',
+group: 'BibleProject',
+language: 'ES',
+id: 'Levitico'
+} 
+,{
+url: 'https://www.youtube.com/embed/dtfbSxNecMk?si=_7RRXI2YTpghISAm&amp;controls=0',
+cover: 'BibleProject-6',
+group: 'BibleProject',
+language: 'ES',
+id: 'Numeros'
+} 
+,{
+url: 'https://www.youtube.com/embed/qfMplfJoYA0?si=_9spOE4RiA6EtS8e&amp;controls=0',
+cover: 'BibleProject-7',
+group: 'BibleProject',
+language: 'ES',
+id: 'Deuteronomios'
+} 
+,{
+url: 'https://www.youtube.com/embed/49ggVrdBN_Y?si=MD1hjyPiW8F-FXSM&amp;controls=0',
+cover: 'BibleProject-8',
+group: 'BibleProject',
+language: 'ES',
+id: 'Josue'
+}
+
 
 
 

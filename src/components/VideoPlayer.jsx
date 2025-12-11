@@ -64,6 +64,33 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
     }
   };
 
+  // Función para adelantar 15 segundos
+  const seekForward = () => {
+    if (!playerRef.current || timeLeft <= 0) return;
+    
+    try {
+      const currentTime = playerRef.current.getCurrentTime();
+      playerRef.current.seekTo(currentTime + 15, true);
+      console.log('Adelantado 15 segundos');
+    } catch (error) {
+      console.error('Error al adelantar:', error);
+    }
+  };
+
+  // Función para retroceder 15 segundos
+  const seekBackward = () => {
+    if (!playerRef.current || timeLeft <= 0) return;
+    
+    try {
+      const currentTime = playerRef.current.getCurrentTime();
+      const newTime = Math.max(0, currentTime - 15); // No retroceder antes del inicio
+      playerRef.current.seekTo(newTime, true);
+      console.log('Retrocedido 15 segundos');
+    } catch (error) {
+      console.error('Error al retroceder:', error);
+    }
+  };
+
   useEffect(() => {
     setApiCalled(false);
   }, [url]);
@@ -215,8 +242,10 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
         />
       </div>
       
-      {/* Botones flotantes */}
-      <div className="fixed bottom-6 left-6 z-40">
+      {/* Controles flotantes - Agrupados en la izquierda */}
+      <div className="fixed bottom-6 left-6 z-40 flex items-center gap-3">
+       
+        {/* Botón play/pause (centro) */}
         <button
           onClick={togglePlay}
           className="px-6 py-2 text-white rounded-full w-[60px] h-[60px] flex justify-center items-center border-[3px] border-white bg-black bg-opacity-70 hover:bg-opacity-90 transition-all"
@@ -224,8 +253,29 @@ const VideoPlayer = ({ url, videoCover, onBack, timeLeft, setIsTimerRunning, fil
         >
           <i className={`text-2xl fa-solid ${isPlaying ? 'fa-pause' : 'fa-play ml-1'}`} />
         </button>
+
+        {/* Botón retroceder 15s */}
+        <button
+          onClick={seekBackward}
+          className="px-4 py-2 text-white rounded-full w-[50px] h-[50px] flex justify-center items-center border-2 border-white bg-black bg-opacity-70 hover:bg-opacity-90 transition-all"
+          disabled={timeLeft <= 0}
+          title="Retroceder 15 segundos"
+        >
+          <i className="fa-solid fa-angles-left text-xl"></i>
+        </button>
+        
+        {/* Botón adelantar 15s */}
+        <button
+          onClick={seekForward}
+          className="px-4 py-2 text-white rounded-full w-[50px] h-[50px] flex justify-center items-center border-2 border-white bg-black bg-opacity-70 hover:bg-opacity-90 transition-all"
+          disabled={timeLeft <= 0}
+          title="Adelantar 15 segundos"
+        >
+          <i className="fa-solid fa-angles-right text-xl"></i>
+        </button>
       </div>
       
+      {/* Botón catálogo (derecha) */}
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={onBack}
