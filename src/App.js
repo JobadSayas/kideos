@@ -3,23 +3,23 @@ import VideoPlayer from './components/VideoPlayer';
 import Catalog from './components/Catalog';
 
 function App() {
-  const version = 'v3.1.2';
+  const version = 'v4.0.0';
   const [currentView, setCurrentView] = useState('catalog');
   const [currentVideo, setCurrentVideo] = useState({ url: null, cover: null });
   const [timeLeft, setTimeLeft] = useState(45 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [userType, setUserType] = useState('');
   
-  const [filterMode, setFilterMode] = useState('v'); // v, m, r
-  const [languageMode, setLanguageMode] = useState('t'); // es, en, t
+  // AHORA SÍ mantenemos estados locales para forzar re-render
+  const [filterMode, setFilterMode] = useState(() => localStorage.getItem('filterMode') || 'v');
+  const [languageMode, setLanguageMode] = useState(() => localStorage.getItem('languageMode') || 't');
+  const [debugMode, setDebugMode] = useState(() => localStorage.getItem('debugMode') === 'true');
 
   const checkForNewDayReset = () => {
     const savedTimeLimit = localStorage.getItem('timeLimit');
     const lastResetDate = localStorage.getItem('lastResetDate');
     const savedTimeLeft = localStorage.getItem('timeLeft');
     const savedUserType = localStorage.getItem('userType');
-    const savedFilterMode = localStorage.getItem('filterMode');
-    const savedLanguageMode = localStorage.getItem('languageMode');
     
     const today = new Date().toDateString();
     
@@ -27,19 +27,13 @@ function App() {
       const newTimeLimit = savedTimeLimit ? parseInt(savedTimeLimit) * 60 : 30 * 60;
       setTimeLeft(newTimeLimit);
       localStorage.setItem('lastResetDate', today);
-      localStorage.setItem('timeLeft', newTimeLimit.toString());
+      localStorage.setItem('timeLeft', newTimeLimit.toString()); // CORRECCIÓN AQUÍ
     } else if (savedTimeLeft) {
       setTimeLeft(parseInt(savedTimeLeft));
     }
 
     if (savedUserType) {
       setUserType(savedUserType);
-    }
-    if (savedFilterMode) {
-      setFilterMode(savedFilterMode);
-    }
-    if (savedLanguageMode) {
-      setLanguageMode(savedLanguageMode);
     }
   };
 
@@ -73,6 +67,49 @@ function App() {
     return () => clearInterval(interval);
   }, [isTimerRunning, timeLeft]);
 
+  // Escuchar cambios en localStorage
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'filterMode') {
+        const newValue = localStorage.getItem('filterMode') || 'v';
+        if (newValue !== filterMode) {
+          setFilterMode(newValue);
+        }
+      } else if (e.key === 'languageMode') {
+        const newValue = localStorage.getItem('languageMode') || 't';
+        if (newValue !== languageMode) {
+          setLanguageMode(newValue);
+        }
+      } else if (e.key === 'debugMode') {
+        const newValue = localStorage.getItem('debugMode') === 'true';
+        if (newValue !== debugMode) {
+          setDebugMode(newValue);
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // También escuchar nuestro propio evento custom
+    const handleCustomStorageChange = () => {
+      // Re-leer todos los valores de localStorage
+      const newFilterMode = localStorage.getItem('filterMode') || 'v';
+      const newLanguageMode = localStorage.getItem('languageMode') || 't';
+      const newDebugMode = localStorage.getItem('debugMode') === 'true';
+      
+      if (newFilterMode !== filterMode) setFilterMode(newFilterMode);
+      if (newLanguageMode !== languageMode) setLanguageMode(newLanguageMode);
+      if (newDebugMode !== debugMode) setDebugMode(newDebugMode);
+    };
+    
+    window.addEventListener('localStorageChange', handleCustomStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorageChange', handleCustomStorageChange);
+    };
+  }, [filterMode, languageMode, debugMode]);
+
   const handleVideoSelect = (videoUrl, videoCover) => {
     if (timeLeft > 0) {
       setCurrentVideo({ url: videoUrl, cover: videoCover });
@@ -91,6 +128,17 @@ function App() {
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
+  // Función para disparar evento custom que Catalog escuchará
+  const notifyCatalogUpdate = () => {
+    console.log('📢 App.js: Disparando evento localStorageChange');
+    window.dispatchEvent(new CustomEvent('localStorageChange', {
+      detail: {
+        timestamp: Date.now(),
+        source: 'secretConfig'
+      }
+    }));
+  };
+
   const handleSecretConfig = () => {
     const input = prompt(`Ingrese:
 - Número de minutos disponibles
@@ -101,7 +149,8 @@ function App() {
 - "en" para idioma Inglés
 - "t" para Todos los idiomas
 - "e" para usuario Ethan
-- "l" para usuario normal`);
+- "l" para usuario normal
+- "d" para modo Debug/Detalles (alternar)`);
 
     if (input === null) return;
 
@@ -119,16 +168,29 @@ function App() {
       }
     } 
     else if (['v', 'm', 'r'].includes(trimmedInput)) {
-      setFilterMode(trimmedInput);
+      console.log(`🎯 App.js: Cambiando filterMode a "${trimmedInput}"`);
       localStorage.setItem('filterMode', trimmedInput);
+      setFilterMode(trimmedInput); // Actualizar estado local
+      notifyCatalogUpdate();
     }
     else if (['es', 'en', 't'].includes(trimmedInput)) {
-      setLanguageMode(trimmedInput);
+      console.log(`🎯 App.js: Cambiando languageMode a "${trimmedInput}"`);
       localStorage.setItem('languageMode', trimmedInput);
+      setLanguageMode(trimmedInput); // Actualizar estado local
+      notifyCatalogUpdate();
     }
     else if (trimmedInput === 'e' || trimmedInput === 'l') {
+      console.log(`🎯 App.js: Cambiando userType a "${trimmedInput}"`);
       setUserType(trimmedInput);
       localStorage.setItem('userType', trimmedInput);
+    }
+    else if (trimmedInput === 'd') {
+      const currentDebug = localStorage.getItem('debugMode') === 'true';
+      const newDebugMode = !currentDebug;
+      console.log(`🎯 App.js: Cambiando debugMode a "${newDebugMode}"`);
+      localStorage.setItem('debugMode', newDebugMode.toString());
+      setDebugMode(newDebugMode); // Actualizar estado local
+      notifyCatalogUpdate();
     }
   };
 
@@ -170,6 +232,10 @@ function App() {
     }
   };
 
+  const getDebugColor = () => {
+    return debugMode ? 'bg-yellow-500 text-black' : '';
+  };
+
   return (
     <div className="w-full h-full bg-black relative">
       <button 
@@ -186,6 +252,11 @@ function App() {
         <span className={`${getFilterColor(filterMode)} px-2 py-1 rounded text-xs font-bold`}>
           {getFilterText(filterMode)}
         </span>
+        {debugMode && (
+          <span className={`${getDebugColor()} px-2 py-1 rounded text-xs font-bold animate-pulse`}>
+            DEBUG
+          </span>
+        )}
       </div>
 
       <div className='absolute top-[10px] right-[30px] text-white text-sm'>
@@ -196,8 +267,7 @@ function App() {
         <Catalog 
           onVideoSelect={handleVideoSelect} 
           userType={userType}
-          filterMode={filterMode}
-          languageMode={languageMode}
+          // NOTA: Ya NO pasamos filterMode/languageMode/debugMode como props
         />
       ) : (
         <VideoPlayer 
