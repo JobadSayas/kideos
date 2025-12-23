@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const Catalog = ({ onVideoSelect, userType }) => {
+const Catalog = ({ onVideoSelect, userType, onEditVideo }) => { // Añadido onEditVideo prop
   const [loadedImages, setLoadedImages] = useState({});
   const [groupedVideos, setGroupedVideos] = useState({});
   const [groupedVideosRandomOrder, setGroupedVideosRandomOrder] = useState([]);
@@ -238,6 +238,15 @@ const Catalog = ({ onVideoSelect, userType }) => {
     return `${label}: <span class="text-yellow-300">${value}</span>`;
   };
 
+  // Función para manejar clic en botón editar
+  const handleEditClick = (video, e) => {
+    e.stopPropagation(); // Evita que se active el clic en el video
+    console.log(`✏️ Editando video ID: ${video.id}`);
+    if (onEditVideo) {
+      onEditVideo(video);
+    }
+  };
+
   // Mostrar estados de carga/error
   if (loading) {
     return (
@@ -348,6 +357,14 @@ const Catalog = ({ onVideoSelect, userType }) => {
                       <div dangerouslySetInnerHTML={{ __html: formatDebugField('album', video.album) }} />
                       <div dangerouslySetInnerHTML={{ __html: formatDebugField('ethan', video.ethan) }} />
                     </div>
+                    {/* Botón de editar para videos recomendados */}
+                    <button
+                      onClick={(e) => handleEditClick(video, e)}
+                      className="mt-2 w-full px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded flex items-center justify-center gap-1"
+                    >
+                      <i className="fa fa-edit text-xs"></i>
+                      Editar
+                    </button>
                   </div>
                 )}
               </div>
@@ -399,6 +416,14 @@ const Catalog = ({ onVideoSelect, userType }) => {
                       <div dangerouslySetInnerHTML={{ __html: formatDebugField('album', video.album) }} />
                       <div dangerouslySetInnerHTML={{ __html: formatDebugField('ethan', video.ethan) }} />
                     </div>
+                    {/* Botón de editar para videos normales */}
+                    <button
+                      onClick={(e) => handleEditClick(video, e)}
+                      className="mt-2 w-full px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded flex items-center justify-center gap-1"
+                    >
+                      <i className="fa fa-edit text-xs"></i>
+                      Editar
+                    </button>
                   </div>
                 )}
               </div>

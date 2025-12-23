@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import VideoPlayer from './components/VideoPlayer';
 import Catalog from './components/Catalog';
+import NewEditPopup from './components/NewEditPopup'; // Nuevo import
 
 function App() {
-  const version = 'v4.0.0';
+  const version = 'v4.1.0';
   const [currentView, setCurrentView] = useState('catalog');
   const [currentVideo, setCurrentVideo] = useState({ url: null, cover: null });
   const [timeLeft, setTimeLeft] = useState(45 * 60);
@@ -14,6 +15,11 @@ function App() {
   const [filterMode, setFilterMode] = useState(() => localStorage.getItem('filterMode') || 'v');
   const [languageMode, setLanguageMode] = useState(() => localStorage.getItem('languageMode') || 't');
   const [debugMode, setDebugMode] = useState(() => localStorage.getItem('debugMode') === 'true');
+  
+  // Estados para el popup de nuevo/editar video
+  const [showVideoPopup, setShowVideoPopup] = useState(false);
+  const [videoPopupMode, setVideoPopupMode] = useState('new'); // 'new' o 'edit'
+  const [videoPopupData, setVideoPopupData] = useState(null); // Datos del video para editar
 
   const checkForNewDayReset = () => {
     const savedTimeLimit = localStorage.getItem('timeLimit');
@@ -27,7 +33,7 @@ function App() {
       const newTimeLimit = savedTimeLimit ? parseInt(savedTimeLimit) * 60 : 30 * 60;
       setTimeLeft(newTimeLimit);
       localStorage.setItem('lastResetDate', today);
-      localStorage.setItem('timeLeft', newTimeLimit.toString()); // CORRECCIÓN AQUÍ
+      localStorage.setItem('timeLeft', newTimeLimit.toString());
     } else if (savedTimeLeft) {
       setTimeLeft(parseInt(savedTimeLeft));
     }
@@ -139,6 +145,37 @@ function App() {
     }));
   };
 
+  // Función para abrir popup de nuevo video
+  const openNewVideoPopup = () => {
+    console.log('🎬 Abriendo popup para nuevo video');
+    setVideoPopupMode('new');
+    setVideoPopupData(null); // Sin datos para nuevo video
+    setShowVideoPopup(true);
+  };
+
+  // Función para abrir popup de edición de video
+  const openEditVideoPopup = (videoData) => {
+    console.log('✏️ Abriendo popup para editar video:', videoData?.id);
+    setVideoPopupMode('edit');
+    setVideoPopupData(videoData); // Datos del video a editar
+    setShowVideoPopup(true);
+  };
+
+  // Función para cerrar el popup
+  const closeVideoPopup = () => {
+    console.log('❌ Cerrando popup de video');
+    setShowVideoPopup(false);
+    setVideoPopupData(null);
+  };
+
+  // Función callback cuando se guarda un video (nuevo o editado)
+  const handleVideoSaved = () => {
+    console.log('✅ Video guardado exitosamente');
+    // Notificar a Catalog para que refresque los videos
+    notifyCatalogUpdate();
+    closeVideoPopup();
+  };
+
   const handleSecretConfig = () => {
     const input = prompt(`Ingrese:
 - Número de minutos disponibles
@@ -150,7 +187,8 @@ function App() {
 - "t" para Todos los idiomas
 - "e" para usuario Ethan
 - "l" para usuario normal
-- "d" para modo Debug/Detalles (alternar)`);
+- "d" para modo Debug/Detalles (alternar)
+- "n" para Nuevo video`); // Añadida opción 'n'
 
     if (input === null) return;
 
@@ -170,13 +208,13 @@ function App() {
     else if (['v', 'm', 'r'].includes(trimmedInput)) {
       console.log(`🎯 App.js: Cambiando filterMode a "${trimmedInput}"`);
       localStorage.setItem('filterMode', trimmedInput);
-      setFilterMode(trimmedInput); // Actualizar estado local
+      setFilterMode(trimmedInput);
       notifyCatalogUpdate();
     }
     else if (['es', 'en', 't'].includes(trimmedInput)) {
       console.log(`🎯 App.js: Cambiando languageMode a "${trimmedInput}"`);
       localStorage.setItem('languageMode', trimmedInput);
-      setLanguageMode(trimmedInput); // Actualizar estado local
+      setLanguageMode(trimmedInput);
       notifyCatalogUpdate();
     }
     else if (trimmedInput === 'e' || trimmedInput === 'l') {
@@ -189,8 +227,12 @@ function App() {
       const newDebugMode = !currentDebug;
       console.log(`🎯 App.js: Cambiando debugMode a "${newDebugMode}"`);
       localStorage.setItem('debugMode', newDebugMode.toString());
-      setDebugMode(newDebugMode); // Actualizar estado local
+      setDebugMode(newDebugMode);
       notifyCatalogUpdate();
+    }
+    else if (trimmedInput === 'n') {
+      // NUEVA OPCIÓN: Abrir popup para nuevo video
+      openNewVideoPopup();
     }
   };
 
@@ -267,7 +309,7 @@ function App() {
         <Catalog 
           onVideoSelect={handleVideoSelect} 
           userType={userType}
-          // NOTA: Ya NO pasamos filterMode/languageMode/debugMode como props
+          onEditVideo={openEditVideoPopup} // Nueva prop para editar
         />
       ) : (
         <VideoPlayer 
@@ -277,6 +319,16 @@ function App() {
           timeLeft={timeLeft}
           setIsTimerRunning={setIsTimerRunning}
           filterMode={filterMode}
+        />
+      )}
+
+      {/* Popup de nuevo/editar video */}
+      {showVideoPopup && (
+        <NewEditPopup
+          mode={videoPopupMode}
+          videoData={videoPopupData}
+          onSave={handleVideoSaved}
+          onClose={closeVideoPopup}
         />
       )}
     </div>
